@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/amoschen/workspace/cpp-cic/libciccore/libciccore.cpp
+libciccore.h
+/home/amoschen/workspace/cpp-cic/libciccore/libciccore.h
+
+/home/amoschen/workspace/cpp-cic/libciccore/libciccore.h
+

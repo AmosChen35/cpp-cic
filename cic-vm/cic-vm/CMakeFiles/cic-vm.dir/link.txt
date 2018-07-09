@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/cic-vm.dir/main.cpp.o  -o cic-vm ../libcic/libcic.a ../libcvm/libcvm.a ../libciccore/libciccore.a 

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/amoschen/workspace/cpp-cic/libcvm/VMFactory.cpp
+libcvm.h
+/home/amoschen/workspace/cpp-cic/libcvm/libcvm.h
+
+/home/amoschen/workspace/cpp-cic/libcvm/VMFactory.h
+
+/home/amoschen/workspace/cpp-cic/libcvm/libcvm.cpp
+libcvm.h
+/home/amoschen/workspace/cpp-cic/libcvm/libcvm.h
+
+/home/amoschen/workspace/cpp-cic/libcvm/libcvm.h
+VMFactory.h
+/home/amoschen/workspace/cpp-cic/libcvm/VMFactory.h
+
