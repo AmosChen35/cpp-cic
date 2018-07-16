@@ -1,2 +1,0 @@
-/usr/bin/ar qc libcvm.a  CMakeFiles/cvm.dir/VMFactory.cpp.o CMakeFiles/cvm.dir/libcvm.cpp.o
-/usr/bin/ranlib libcvm.a

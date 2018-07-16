@@ -1,2 +1,0 @@
-/usr/bin/ar qc libciccore.a  CMakeFiles/ciccore.dir/libciccore.cpp.o
-/usr/bin/ranlib libciccore.a

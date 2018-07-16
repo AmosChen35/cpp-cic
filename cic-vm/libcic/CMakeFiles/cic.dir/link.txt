@@ -1,2 +1,0 @@
-/usr/bin/ar qc libcic.a  CMakeFiles/cic.dir/libcic.cpp.o
-/usr/bin/ranlib libcic.a
