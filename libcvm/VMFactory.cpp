@@ -165,8 +165,12 @@ std::unique_ptr<VMFace> VMFactory::create(VMKind _kind)
     case VMKind::Hera:
         return std::unique_ptr<VMFace>(new EVMC{evmc_create_hera()});
 #endif
+*/
     case VMKind::Interpreter:
-        return std::unique_ptr<VMFace>(new EVMC{evmc_create_interpreter()});
+        //return std::unique_ptr<VMFace>(new EVMC{evmc_create_interpreter()});
+        std::cout<<"VMKind::Interpreter"<<std::endl;
+        return std::unique_ptr<VMFace>(new LegacyVM);
+/*
     case VMKind::DLL:
         return std::unique_ptr<VMFace>(new EVMC{g_dllEvmcCreate()});
 */

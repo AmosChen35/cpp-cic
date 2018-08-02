@@ -17,6 +17,7 @@ set(sources
     Address.cpp Address.h
     Guards.h
     Base64.cpp Base64.h
+    Worker.cpp Worker.h
 
     dbfwd.h
     db.h
@@ -36,7 +37,7 @@ set(sources
 add_library(colcore ${sources})
 
 target_include_directories(colcore PUBLIC ${Boost_INCLUDE_DIR})
-target_link_libraries(colcore PUBLIC Boost::filesystem Boost::system Boost::log Boost::thread PRIVATE ethash::ethash)
+target_link_libraries(colcore PUBLIC cic-buildinfo Boost::filesystem Boost::system Boost::log Boost::thread PRIVATE ethash::ethash)
 
 target_include_directories(colcore SYSTEM PUBLIC ${LEVELDB_INCLUDE_DIRS})
 target_link_libraries(colcore PRIVATE ${LEVELDB_LIBRARIES})

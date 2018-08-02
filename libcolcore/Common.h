@@ -3,6 +3,9 @@
 
 using namespace boost::multiprecision::literals;
 
+extern char const* Version;
+extern std::string const EmptyString;
+
 // Binary data types.
 using bytes = std::vector<byte>;
 using bytesRef = vector_ref<byte>;
@@ -86,5 +89,83 @@ enum class WithExisting: int
     Rescue,
     Kill
 };
+
+/// Inheritable for classes that have invariants.
+class HasInvariants
+{
+public:
+    /// Reimplement to specify the invariants.
+    virtual bool invariants() const = 0;
+};
+
+/// RAII checker for invariant assertions.
+class InvariantChecker
+{
+public:
+    InvariantChecker(HasInvariants* _this, char const* _fn, char const* _file, int _line): m_this(_this), m_function(_fn), m_file(_file), m_line(_line) { checkInvariants(_this, _fn , _file, _line, true); }
+    ~InvariantChecker() { checkInvariants(m_this, m_function, m_file, m_line, false); }
+    /// Check invariants are met, throw if not.
+    static void checkInvariants(HasInvariants const* _this, char const* _fn, char const* _file, int line, bool _pre);
+
+private:
+    HasInvariants const* m_this;
+    char const* m_function;
+    char const* m_file;
+    int m_line;
+};
+
+/// Scope guard for invariant check in a class derived from HasInvariants.
+#if ETH_DEBUG
+#define DEV_INVARIANT_CHECK ::CI::col::InvariantChecker __dev_invariantCheck(this, BOOST_CURRENT_FUNCTION, __FILE__, __LINE__)
+#define DEV_INVARIANT_CHECK_HERE ::CI::col::InvariantChecker::checkInvariants(this, BOOST_CURRENT_FUNCTION, __FILE__, __LINE__, true)
+#else
+#define DEV_INVARIANT_CHECK (void)0;
+#define DEV_INVARIANT_CHECK_HERE (void)0;
+#endif
+
+/// Simple scope-based timer helper.
+class TimerHelper
+{
+public:
+    TimerHelper(std::string const& _id, unsigned _msReportWhenGreater = 0): m_t(std::chrono::high_resolution_clock::now()), m_id(_id), m_ms(_msReportWhenGreater) {}
+    ~TimerHelper();
+
+private:
+    std::chrono::high_resolution_clock::time_point m_t;
+    std::string m_id;
+    unsigned m_ms;
+};
+
+class Timer
+{
+public:
+    Timer() { restart(); }
+
+    std::chrono::high_resolution_clock::duration duration() const { return std::chrono::high_resolution_clock::now() - m_t; }
+    double elapsed() const { return std::chrono::duration_cast<std::chrono::microseconds>(duration()).count() / 1000000.0; }
+    void restart() { m_t = std::chrono::high_resolution_clock::now(); }
+
+private:
+    std::chrono::high_resolution_clock::time_point m_t;
+};
+
+#define DEV_TIMED(S) for (::std::pair<::CI::col::TimerHelper, bool> __eth_t(S, true); __eth_t.second; __eth_t.second = false)
+#define DEV_TIMED_SCOPE(S) ::CI::col::TimerHelper __eth_t(S)
+#if defined(_WIN32)
+#define DEV_TIMED_FUNCTION DEV_TIMED_SCOPE(__FUNCSIG__)
+#else
+#define DEV_TIMED_FUNCTION DEV_TIMED_SCOPE(__PRETTY_FUNCTION__)
+#endif
+
+#define DEV_TIMED_ABOVE(S, MS) for (::std::pair<::CI::col::TimerHelper, bool> __eth_t(::CI::col::TimerHelper(S, MS), true); __eth_t.second; __eth_t.second = false)
+#define DEV_TIMED_SCOPE_ABOVE(S, MS) ::CI::col::TimerHelper __eth_t(S, MS)
+#if defined(_WIN32)
+#define DEV_TIMED_FUNCTION_ABOVE(MS) DEV_TIMED_SCOPE_ABOVE(__FUNCSIG__, MS)
+#else
+#define DEV_TIMED_FUNCTION_ABOVE(MS) DEV_TIMED_SCOPE_ABOVE(__PRETTY_FUNCTION__, MS)
+#endif
+
+/// Get the current time in seconds since the epoch in UTC
+int64_t utcTime();
 
 #endif //LIBCOLCORE_COMMON_H

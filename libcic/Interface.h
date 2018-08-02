@@ -92,7 +92,6 @@ public:
     virtual std::map<h256, std::pair<u256, u256>> storageAt(Address _a, BlockNumber _block) const = 0;
 
     // [LOGS API]
-    
     virtual LocalisedLogEntries logs(unsigned _watchId) const = 0;
     virtual LocalisedLogEntries logs(LogFilter const& _filter) const = 0;
 
@@ -121,8 +120,7 @@ public:
     virtual bool isKnown(BlockNumber _block) const = 0;
     virtual bool isKnown(h256 const& _hash) const = 0;
     virtual BlockHeader blockInfo(h256 _hash) const = 0;
-    //FIXME
-    //virtual BlockDetails blockDetails(h256 _hash) const = 0;
+    virtual BlockDetails blockDetails(h256 _hash) const = 0;
     virtual Transaction transaction(h256 _blockHash, unsigned _i) const = 0;
     virtual LocalisedTransaction localisedTransaction(h256 const& _blockHash, unsigned _i) const = 0;
     virtual BlockHeader uncle(h256 _blockHash, unsigned _i) const = 0;
@@ -135,14 +133,12 @@ public:
     virtual TransactionHashes transactionHashes(h256 _blockHash) const = 0;
 
     virtual BlockHeader pendingInfo() const { return BlockHeader(); }
-    //FIXME
-    //virtual BlockDetails pendingDetails() const { return BlockDetails(); }
+    virtual BlockDetails pendingDetails() const { return BlockDetails(); }
     /// @returns the EVMSchedule in the context of the pending block.
     virtual EVMSchedule evmSchedule() const { return EVMSchedule(); }
 
     BlockHeader blockInfo(BlockNumber _block) const;
-    //FIXME
-    //BlockDetails blockDetails(BlockNumber _block) const;
+    BlockDetails blockDetails(BlockNumber _block) const;
     Transaction transaction(BlockNumber _block, unsigned _i) const { auto p = transactions(_block); return _i < p.size() ? p[_i] : Transaction(); }
     TransactionHashes transactionHashes(BlockNumber _block) const { if (_block == PendingBlock) return pendingHashes(); return transactionHashes(hashFromNumber(_block)); }
     BlockHeader uncle(BlockNumber _block, unsigned _i) const { return uncle(hashFromNumber(_block), _i); }

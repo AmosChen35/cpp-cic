@@ -51,7 +51,8 @@ HunterGate(
 project(cpp-cic)
 set(PROJECT_VERSION 0.1.0.dev0)
 
-#cable_add_buildinfo_library(PREFIX aleth)
+include(BuildInfo)
+cable_add_buildinfo_library(PREFIX cic)
 
 set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY On)
 
@@ -70,6 +71,9 @@ find_package(jsoncpp CONFIG REQUIRED)
 
 hunter_add_package(cryptopp)
 find_package(cryptopp CONFIG REQUIRED)
+
+hunter_add_package(libjson-rpc-cpp)
+find_package(libjson-rpc-cpp CONFIG REQUIRED)
 
 hunter_add_package(libscrypt)
 find_package(libscrypt CONFIG REQUIRED)
@@ -91,9 +95,13 @@ add_subdirectory(json_spirit)
 
 add_subdirectory(libcolcore)
 add_subdirectory(libcolcrypto)
+add_subdirectory(libcnet)
 add_subdirectory(libcicore)
 add_subdirectory(libcvm)
 add_subdirectory(libcic)
 add_subdirectory(libcihashseal)
+
+add_subdirectory(libweb3agent)
+add_subdirectory(libweb3crpc)
 
 add_subdirectory(cic-vm)

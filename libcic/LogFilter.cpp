@@ -58,13 +58,10 @@ bool LogFilter::matches(LogBloom _bloom) const
     return true;
 }
 
-//FIXME
-/*
 bool LogFilter::matches(Block const& _s, unsigned _i) const
 {
     return matches(_s.receipt(_i)).size() > 0;
 }
-*/
 
 vector<LogBloom> LogFilter::bloomPossibilities() const
 {

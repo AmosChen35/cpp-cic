@@ -20,6 +20,9 @@
 #include <pthread.h>
 #endif
 
+//Version
+#include <cic-buildinfo.h>
+
 //Json library
 #include <json_spirit/JsonSpiritHeaders.h>
 
@@ -113,6 +116,7 @@ namespace CI
         #include "Address.h"
         #include "Guards.h"
         #include "Base64.h"
+        #include "Worker.h"
     }
 }
 

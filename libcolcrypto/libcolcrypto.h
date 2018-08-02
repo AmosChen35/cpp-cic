@@ -2,9 +2,16 @@
 #define LIBCOLCRYPTO_LIBCOLCRYPTO_H
 
 #include <libcolcore/libcolcore.h>
+#include <json_spirit/JsonSpiritHeaders.h>
 
 //C++ standard
 #include <mutex>
+#include <functional>
+#include <thread>
+
+//C++ boost
+#include <boost/filesystem.hpp>
+#include <boost/algorithm/string.hpp>
 
 //Crptopp
 #include <cryptopp/aes.h>
@@ -42,6 +49,9 @@ namespace CI
         #include "CryptoPP.h"
         #include "Hash.h"
         #include "LibSnark.h"
+
+        //Feature relational with key store.
+        #include "SecretStore.h"
     }
 }
 

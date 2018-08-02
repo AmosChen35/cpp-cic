@@ -1,0 +1,6 @@
+#ifndef LIBWEB3CRPC_JSONHELPER_CRPC_H
+#define LIBWEB3CRPC_JSONHELPER_CRPC_H
+
+h256 h256fromHex(std::string const& _s);
+
+#endif //LIBWEB3CRPC_JSONHELPER_CRPC_H

@@ -142,8 +142,6 @@ string StandardTrace::json(bool _styled) const
     return _styled ? Json::StyledWriter().write(m_trace) : Json::FastWriter().write(m_trace);
 }
 
-//FIXME
-/*
 Executive::Executive(Block& _s, BlockChain const& _bc, unsigned _level):
     m_s(_s.mutableState()),
     m_envInfo(_s.info(), _bc.lastBlockHashes(), 0),
@@ -167,7 +165,6 @@ Executive::Executive(State& io_s, Block const& _block, unsigned _txIndex, BlockC
     m_sealEngine(*_bc.sealEngine())
 {
 }
-*/
 
 u256 Executive::gasUsed() const
 {
@@ -256,6 +253,8 @@ bool Executive::call(Address const& _receiveAddress, Address const& _senderAddre
 
 bool Executive::call(CallParameters const& _p, u256 const& _gasPrice, Address const& _origin)
 {
+    cout<<"Into Executive Call"<<endl;
+
     // If external transaction.
     if (m_t)
     {
@@ -270,6 +269,8 @@ bool Executive::call(CallParameters const& _p, u256 const& _gasPrice, Address co
 
     if (m_sealEngine.isPrecompiled(_p.codeAddress, m_envInfo.number()))
     {
+        cout<<"m_sealEngine.isPrecompiled():Ture"<<endl;
+
         bigint g = m_sealEngine.costOfPrecompiled(_p.codeAddress, _p.data, m_envInfo.number());
         if (_p.gas < g)
         {
@@ -303,6 +304,8 @@ bool Executive::call(CallParameters const& _p, u256 const& _gasPrice, Address co
     }
     else
     {
+        cout<<"m_sealEngine.isPrecompiled():False"<<endl;
+
         m_gas = _p.gas;
         if (m_s.addressHasCode(_p.codeAddress))
         {

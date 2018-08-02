@@ -1,6 +1,9 @@
 #ifndef LIBCIC_GASPRICER_H
 #define LIBCIC_GASPRICER_H
 
+class Block;
+class BlockChain;
+
 enum class TransactionPriority
 {
     Lowest = 0,
@@ -19,9 +22,9 @@ public:
     virtual ~GasPricer() = default;
 
     virtual u256 bid(TransactionPriority _p = TransactionPriority::Medium) const = 0;
-    //FIXME
-    //virtual u256 ask(Block const&) const = 0;
-    //virtual void update(BlockChain const&) {}
+    virtual u256 ask(Block const&) const = 0;
+
+    virtual void update(BlockChain const&) {}
 };
 
 class TrivialGasPricer: public GasPricer
@@ -34,8 +37,8 @@ public:
     void setBid(u256 const& _bid) { m_bid = _bid; }
 
     u256 ask() const { return m_ask; }
-    //FIXME
-    //u256 ask(Block const&) const override { return m_ask; }
+
+    u256 ask(Block const&) const override { return m_ask; }
     u256 bid(TransactionPriority = TransactionPriority::Medium) const override { return m_bid; }
 
 private:

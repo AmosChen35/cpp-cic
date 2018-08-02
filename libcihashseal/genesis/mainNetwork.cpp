@@ -4,7 +4,7 @@ using namespace CI;
 using namespace CI::col;
 using namespace CI::cic;
 
-static h256 const c_genesisStateRootMainNetwork("d7f8974fb5ac78d9ac099b9ad5018bedc2ce0a72dad1827a1709da30580f0544");
+static h256 const c_genesisStateRootMainNetwork("23d6f3e84be48e8575af7200e4048bcb12381bda58f594234e7f0d1ba64294e5");
 static std::string const c_genesisInfoMainNetwork = std::string() +
 R"E(
 {
@@ -30,13 +30,13 @@ R"E(
     },
     "genesis": {
         "nonce": "0x0000000000000042",
-        "difficulty": "0x400000000",
+        "difficulty": "0x100000",
         "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
         "author": "0x0000000000000000000000000000000000000000",
         "timestamp": "0x00",
         "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
         "extraData": "0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa",
-        "gasLimit": "0x1388"
+        "gasLimit": "0x3d0900"
     },
     "accounts": {
         "0000000000000000000000000000000000000001": { "precompiled": { "name": "ecrecover", "linear": { "base": 3000, "word": 0 } } },
@@ -51,7 +51,7 @@ R"E(
         "balance": "1337000000000000000000"
         },
         "17961d633bcf20a7b029a7d94b7df4da2ec5427f": {
-        "balance": "229427000000000000000"
+        "balance": "000000000000000000001"
         },
         "493a67fe23decc63b10dda75f3287695a81bd5ab": {
         "balance": "880000000000000000000"

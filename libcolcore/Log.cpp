@@ -16,7 +16,6 @@ struct ThreadLocalLogName
 };
 
 ThreadLocalLogName g_logThreadName("main");
-}  // namespace
 
 std::string getThreadName()
 {
@@ -82,9 +81,10 @@ void setupLogging(LoggingOptions const& _options)
         boost::log::make_exception_handler<std::exception>([](std::exception const& _ex) {
         std::cerr << "Exception from the logging library: " << _ex.what() << '\n';
     }));
+}
 
 } //namespace col
-} //namespace CIC
+} //namespace CI
 
 namespace boost
 {
@@ -243,5 +243,6 @@ inline boost::log::formatting_ostream& operator<<(
     _strm << constValue;
     return _strm;
 }
-} //namespace col
-} //namespace CI
+
+} //namespace log
+} //namespace boost

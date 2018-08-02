@@ -6,6 +6,8 @@ set(sources
     CryptoPP.cpp CryptoPP.h
     Hash.cpp Hash.h
     LibSnark.cpp LibSnark.h
+
+    SecretStore.cpp SecretStore.h
 )
 
 add_library(colcrypto ${sources})

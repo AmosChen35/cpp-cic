@@ -583,13 +583,13 @@ std::pair<ExecutionResult, TransactionReceipt> State::execute(EnvInfo const& _en
 
     auto onOp = _onOp;
 #if ETH_VMTRACE
-	// Run the existing onOp function and the tracer
-	onOp = [&_onOp, &e](uint64_t _steps, uint64_t PC, Instruction inst, bigint
-			newMemSize, bigint gasCost, bigint gas, VMFace const* _vm,
-			ExtVMFace const* voidExt) {
-		_onOp(_steps, PC, inst, newMemSize, gasCost, gas, _vm, voidExt);
-		e.simpleTrace();
-	};
+    // Run the existing onOp function and the tracer
+    onOp = [&_onOp, &e](uint64_t _steps, uint64_t PC, Instruction inst, bigint
+            newMemSize, bigint gasCost, bigint gas, VMFace const* _vm,
+            ExtVMFace const* voidExt) {
+        _onOp(_steps, PC, inst, newMemSize, gasCost, gas, _vm, voidExt);
+        e.simpleTrace();
+    };
 #endif
 
     u256 const startGasUsed = _envInfo.gasUsed();
@@ -615,8 +615,6 @@ std::pair<ExecutionResult, TransactionReceipt> State::execute(EnvInfo const& _en
     return make_pair(res, receipt);
 }
 
-//FIXME
-/*
 void State::executeBlockTransactions(Block const& _block, unsigned _txCount, LastBlockHashesFace const& _lastHashes, SealEngineFace const& _sealEngine)
 {
     u256 gasUsed = 0;
@@ -630,7 +628,6 @@ void State::executeBlockTransactions(Block const& _block, unsigned _txCount, Las
         gasUsed += e.gasUsed();
     }
 }
-*/
 
 std::ostream& CI::cic::operator<<(std::ostream& _out, State const& _s)
 {
@@ -708,8 +705,6 @@ std::ostream& CI::cic::operator<<(std::ostream& _out, State const& _s)
     return _out;
 }
 
-//FIXME
-/*
 State& CI::cic::createIntermediateState(State& o_s, Block const& _block, unsigned _txIndex, BlockChain const& _bc)
 {
     o_s = _block.state();
@@ -723,7 +718,6 @@ State& CI::cic::createIntermediateState(State& o_s, Block const& _block, unsigne
     }
     return o_s;
 }
-*/
 
 template <class DB>
 AddressHash CI::cic::commit(AccountMap const& _cache, SecureTrieDB<Address, DB>& _state)

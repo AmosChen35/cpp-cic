@@ -37,8 +37,7 @@ public:
     std::vector<LogBloom> bloomPossibilities() const;
 
     bool matches(LogBloom _bloom) const;
-    //FIXME
-    //bool matches(Block const& _b, unsigned _i) const;
+    bool matches(Block const& _b, unsigned _i) const;
     LogEntries matches(TransactionReceipt const& _r) const;
 
     LogFilter address(Address _a) { m_addresses.insert(_a); return *this; }

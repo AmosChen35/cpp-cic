@@ -13,6 +13,8 @@ set(sources
     BlockHeader.cpp BlockHeader.h
 
     SealEngine.cpp SealEngine.h
+
+    KeyManager.cpp KeyManager.h
 )
 
 add_library(cicore ${sources})
